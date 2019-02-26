@@ -76,7 +76,7 @@ public abstract class CommDevice {
     private void sendMessage(Message outcomingMessage, Channel channelToSent){
         outcomingMessage.setTotalTime(outcomingMessage.getTotalTime()+delay);
         outcomingMessage.addInterDevice(this.id);
-        channelToSent.receiveMessageFromDevice(outcomingMessage, this);
+        channelToSent.receiveMessage(outcomingMessage, this);
     }
 
     /**
