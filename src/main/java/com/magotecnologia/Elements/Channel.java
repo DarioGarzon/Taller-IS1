@@ -1,5 +1,7 @@
 package com.magotecnologia.Elements;
 
+import com.magotecnologia.Elements.Exceptions.NotProperObjectException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -62,10 +64,29 @@ public class Channel {
      * Metodo que recibe un mensaje desde una pc
      * @param incomingMessage Mensaje recibido
      * @see Message
+     * @param sender Objeto que envío el mensaje
+     * @see Channel
+     */
+     public void receiveMessage(Message incomingMessage, Object sender) {
+         if(sender instanceof Computer){
+             receiveMessageFromPC(incomingMessage,(Computer) sender );
+         }
+         else if (sender instanceof CommDevice){
+             receiveMessageFromDevice(incomingMessage,(CommDevice)sender);
+         }
+         else {
+             throw new RuntimeException();
+         }
+     }
+
+    /**
+     * Metodo que recibe un mensaje desde una pc
+     * @param incomingMessage Mensaje recibido
+     * @see Message
      * @param senderComputer  Computador que envìa el mensale
      * @see Channel
      */
-    public void receiveMessageFromPC(Message incomingMessage, Computer senderComputer ) {
+    private void receiveMessageFromPC(Message incomingMessage, Computer senderComputer ) {
         if(connectedComputers !=null) {
             for (Computer connectedComputer:connectedComputers ) {
                 if(!senderComputer.getIp().equals(connectedComputer.getIp())) {
@@ -87,7 +108,7 @@ public class Channel {
      * @param senderDevice  Dispositivo que envìa el mensale
      * @see Channel
      */
-    public void receiveMessageFromDevice(Message incomingMessage, CommDevice senderDevice ) {
+    private void receiveMessageFromDevice(Message incomingMessage, CommDevice senderDevice ) {
         if(connectedComputers !=null) {
             for (Computer connectedComputer : connectedComputers) {
                 sendMessageToPc(incomingMessage, connectedComputer);

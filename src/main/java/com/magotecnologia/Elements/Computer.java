@@ -63,7 +63,7 @@ public class Computer{
      */
     public void sendMessage(Message outcomingMessage){
         if(commChannel !=null){
-        commChannel.receiveMessageFromPC(outcomingMessage, this);
+        commChannel.receiveMessage(outcomingMessage, this);
         }
     }
 
@@ -87,6 +87,7 @@ public class Computer{
                 messageBuilder.append(".");
                 System.out.println(messageBuilder.toString());
             }
+            System.out.println("tiempo total del envío del mensaje: "+ incomingMessage.getTotalTime()+ "\n");
             System.out.println("Contenido: "+ incomingMessage.getBody()+ "\n");
         }
     }
