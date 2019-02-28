@@ -1,6 +1,7 @@
 package com.magotecnologia.Elements;
 
-import com.magotecnologia.Elements.Exceptions.NotProperObjectException;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class Channel {
              receiveMessageFromDevice(incomingMessage,(CommDevice)sender);
          }
          else {
-             throw new RuntimeException();
+             throw new NotImplementedException();
          }
      }
 
